@@ -1,5 +1,5 @@
 {
-  "name": "dfiles",
+  "name": "@madkoo/dfiles",
   "version": "1.0.0",
   "description": "Manage specific files/folders from multiple git repositories",
   "bin": {
@@ -27,11 +27,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/madkoo/distrubute-files.git"
+    "url": "https://github.com/madkoo/distributed-files.git"
   },
-  "homepage": "https://github.com/madkoo/distrubute-files#readme",
+  "homepage": "https://github.com/madkoo/distributed-files#readme",
   "bugs": {
-    "url": "https://github.com/madkoo/distrubute-files/issues"
+    "url": "https://github.com/madkoo/distributed-files/issues"
   },
   "keywords": [
     "dotfiles",
