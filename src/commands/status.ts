@@ -49,7 +49,7 @@ function stateLabel(state: StatusResult['state']): string {
   return 'current';
 }
 
-function determineState(entry: ManifestEntry): StatusResult['state'] {
+export function determineState(entry: ManifestEntry): StatusResult['state'] {
   const cacheDir = getCacheDir(entry.repo);
   const sourcePath = path.join(cacheDir, entry.source);
   const destinationPath = resolvePath(entry.destination);

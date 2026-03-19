@@ -10,7 +10,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "vitest run"
   },
   "dependencies": {
     "commander": "^14.0.3",
@@ -20,7 +21,8 @@
   "devDependencies": {
     "@types/node": "^25.5.0",
     "ts-node": "^10.9.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "vitest": "^3.0.0"
   },
   "engines": {
     "node": ">=16.7.0"

@@ -34,7 +34,8 @@ export function globBase(pattern: string): string {
     if (/[*?[\]{}]/.test(seg)) break;
     base.push(seg);
   }
-  return base.length > 0 ? base.join('/') : '.';
+  const result = base.join('/');
+  return result.length > 0 ? result : '.';
 }
 
 /**
