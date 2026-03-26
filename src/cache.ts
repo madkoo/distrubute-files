@@ -82,7 +82,12 @@ export async function ensureCached(repoUrl: string, branch: string): Promise<str
   // Step 1: clear any stale index lock left by a previously interrupted operation
   const lockFile = path.join(cacheDir, '.git', 'index.lock');
   if (fs.existsSync(lockFile)) {
-    fs.rmSync(lockFile);
+    try {
+      fs.rmSync(lockFile, { force: true });
+    } catch {
+      // ignore — if we can't remove the lock, the subsequent git operation will
+      // surface its own error (e.g. "Unable to lock index file")
+    }
   }
 
   // Step 2: fetch with --depth 1 to avoid deepening the shallow clone
@@ -101,8 +106,14 @@ export async function ensureCached(repoUrl: string, branch: string): Promise<str
     );
   }
 
-  // Step 3: checkout the branch
-  await git.checkout(branch);
+  // Step 3: checkout the branch (create local tracking branch if needed, reset if detached)
+  try {
+    await git.checkout(['-B', branch, `origin/${branch}`]);
+  } catch (error) {
+    throw new Error(
+      `Failed to checkout branch "${branch}" in cached repository "${repoUrl}" at "${cacheDir}": ${toErrorMessage(error)}`
+    );
+  }
 
   // Step 4: try pull; on fast-forward failure use reset --hard (no extra network call)
   try {
